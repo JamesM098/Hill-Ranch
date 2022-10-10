@@ -1,0 +1,81 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+    {% block css %}{% endblock %}
+</head>
+
+
+<body>
+    <!--nav bar-->
+    <div>
+      {% block navbar %}
+      <div style = "position:sticky">
+        <h1>
+          <p></p>
+          <a href = "/">
+            <img src = "{% static 'imgs/logo.png' %}" style = "width:10%; margin-left:0.2vw">
+          </a>
+          <a href = "/" style = "margin-left: 12vw;font-size:5vw">
+            <img src = "{% static 'imgs/title.png' %}" style = "width:50%">
+          </a>
+          <a href = "/">
+            <img src = "{% static 'imgs/logo.png' %}" style = "width:10%; margin-left:15vw">
+          </a>
+        </h1>
+      
+        <div id ="navbar">
+        <h2 class = "top-bar-right" style = " padding:1px; ">
+          <ul class = "menu" style = "font-size:20px;">
+            <li><a href = "/" >Home</a></li>
+            <li><a href = "/cows/all-cows/">All Cows</a></li>
+            <li><a href = "/add-cow">Add Cow</a></li>
+            <li><a href = "/farms/all-farms/">All Farms</a></li>
+            <li><a href = "/add-location">Add Farm Location</a></li>
+
+
+     
+              
+            <form class = "d-flex" method = POST action ="{% url 'cows_url' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type ="search" placeholder="Search for a cow... " aria-label="Search" name ="searched"><button class = "hollow button" type = "submit">SEARCH</button></form></li>
+
+            <form class = "d-flex" method = POST action ="{% url 'farms_url' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type ="search" placeholder="Search for a location... " aria-label="Search" name ="locSearch"><button class = "hollow button" type = "submit">SEARCH</button></form></li>
+           
+              
+              </a>
+            </li>
+            <li style = "margin-left: 10px;margin-top:0.8vw"><a href = "/help" class = "hollow alert button" style = "font-size: 17px;"> HELP </a></li>
+          </ul>
+        </h2>
+      </div>
+      {% endblock %}
+
+
+
+  {% block body %}{% endblock %}
+
+  <script src="{% static 'js/vendor.js' %}"></script>
+  <script src="{% static 'js/foundation.min.js' %}"></script>
+</body>
+
+
+{% block footer %}
+<div class="footer-box">
+  <form>
+   <a style = "margin-left: 13vw;" >
+      <span></span>
+      Page created by James Meyer - This page specifically created for CINS465 - Web Dev
+    </a>
+  </form>
+</div>
+
+{% endblock %}
+</html>

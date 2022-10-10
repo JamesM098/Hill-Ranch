@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block title %} {{ title }} {% endblock %}
+
+
+
+
+
+{% block body %}
+ <div >
+    <div class="footer-box">
+        <form>
+          <a style = "margin-left: 1vw;" >
+            <span></span>
+            ALL COWS
+          </a>
+        </form>
+      </div>
+  <h2 style="color:rgb(49, 49, 49)">Click a specific cow to see it's details</h2>
+  <br/>
+  
+  {% for cow in cow_list reversed %} 
+  <div class = "card">
+    <div class = "card-header" style = "font-size: 2vw;">
+
+      <a href = "{% url 'show-cow' cow.id %}"{{ cow }}>
+    </div>
+    <div class = "card-body">
+      <h4><strong>Cow Tag: </strong>  {{ cow.cow_tag }}</h1>
+    </a>
+      <h5 class = "card-title">
+              <strong>Farm:</strong> {{ cow.cow_location }}
+              <br/>
+              <strong>Cow Sex: </strong> {{ cow.cow_sex }}
+              <br/>
+              <strong>Notes:</strong> {{ cow.cow_notes }}
+              <br/>
+              
+
+        </h1>
+        </div>
+  </div>
+  
+
+  {% endfor %}
+  
+
+
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+<div class="footer-box">
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block css %}
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 2px;
+    transition: transform .2s;
+    margin: 0 auto;
+  }
+  .row {
+    clear: both;
+    display: table;
+  }
+  .xa {
+    font-size: 2vw;
+    font-family:'Times New Roman', Times, serif;
+
+    text-transform: uppercase;
+    margin: 20px;
+  }
+  .za {
+    font-size: 2vw;
+    font-family:cursive;
+    text-transform: uppercase;
+  }
+  body {
+  font-family: sans-serif;
+  background:#75777c;
+}
+
+    .column:hover {
+      -ms-transform: scale(1.2); /* IE 9 */
+      -webkit-transform: scale(1.2); /* Safari 3-8 */
+      transform: scale(1.05); 
+    }
+
+
+  .footer-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .10s;
+    margin-top: 40px;
+    letter-spacing: 4px
+  }
+
+
+  .footer-box a span {
+    position: absolute;
+    display: block;
+  }
+
+  .footer-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 2s linear infinite;
+  }
+
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,100% {
+      left: 100%;
+    }
+
+    
+  }
+
+
+#navbar {
+  overflow: hidden;
+  background-color:whitesmoke
+}
+
+#navbar a {
+
+  padding: 14px 16px;
+
+}
+
+
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 10px;
+}
+
+
+  </style>
+{% endblock %}

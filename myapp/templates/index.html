@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block title %} {{ title }} {% endblock %}
+
+
+
+
+
+{% block body %}
+<div>
+  <div>
+    <a href = "/meat" class = "button large">Meat</a>
+    <a href = "/cows/all-cows" class = "button large">Other stuff</a>
+
+  </div>
+  <div>
+  </div>
+</div>
+<div class = "row">
+  
+  <div class = "column">
+    <img src = "https://images.pexels.com/photos/458991/pexels-photo-458991.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" style = "width:100%; margin-left: 15vw;">
+  </div>
+  <div class = "column">
+    <img src = "https://img1.wsimg.com/isteam/ip/7da1e3a1-90ed-4cb8-9e8f-3744a9ba3682/A1BAAC63-1AC2-4EDA-828F-CF429076357B.jpeg" style = "width:100%; margin-left: 15vw;">
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<p id="demo"></p>
+
+{% endblock %}
+
+
+{% block footer %}
+<div class="footer-box">
+  <form>
+    <a style = "margin-left: 25vw; margin-top:6vw" >
+      <span></span>
+        Cow Tracking Website by James Meyer for Capstone
+    </a>
+  </form>
+</div>
+
+{% endblock %}
+
+
+{% block buttons %}
+{% endblock %}
+
+
+
+
+
+{% block css %}
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 2px;
+    transition: transform .2s;
+    margin: 0 auto;
+  }
+  .row {
+    clear: both;
+    display: table;
+  }
+  .xa {
+    font-size: 2vw;
+    font-family:'Times New Roman', Times, serif;
+
+    text-transform: uppercase;
+    margin: 20px;
+  }
+  .za {
+    font-size: 2vw;
+    font-family:cursive;
+    text-transform: uppercase;
+  }
+  body {
+  font-family: sans-serif;
+  background:#75777c;
+}
+
+    .column:hover {
+      -ms-transform: scale(1.2); /* IE 9 */
+      -webkit-transform: scale(1.2); /* Safari 3-8 */
+      transform: scale(1.05); 
+    }
+
+
+  .footer-box form a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #03e9f4;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 40px;
+    letter-spacing: 4px
+  }
+
+
+  .footer-box a span {
+    position: absolute;
+    display: block;
+  }
+
+  .footer-box a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #03e9f4);
+    animation: btn-anim1 2s linear infinite;
+  }
+
+  @keyframes btn-anim1 {
+    0% {
+      left: -100%;
+    }
+    50%,100% {
+      left: 100%;
+    }
+
+    
+  }
+  .clock {
+  
+    color: #17D4FE;
+    font-size: 1.5vw;
+    font-family: Orbitron;
+    letter-spacing: 0.1vw;
+  }
+
+
+#navbar {
+  overflow: hidden;
+  background-color:whitesmoke
+}
+
+#navbar a {
+
+  padding: 14px 16px;
+
+}
+
+
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 10px;
+}
+
+
+  </style>
+{% endblock %}
+
+
+{% block loginpage %}
+<p>log in here</p>
+{% endblock %}
