@@ -94,10 +94,42 @@ def farms(request):
   
 def all_farms(request):
   farm_list = FarmLocations.objects.all()
+  cow_list = Cow.objects.all()
+  total_cows = len(Cow.objects.all())
   context={
 
     "title":"All Farms",
-    "farm_list":farm_list
+    "farm_list":farm_list,
+    "cow_list":cow_list,
+    "total_cows":total_cows
   }
 
   return render(request, "all_farms.html", context)
+
+
+def single_cow(request, cow_id):
+  cow = Cow.objects.get(pk=cow_id)
+  childrenlist = cow.children.all()
+  childrenlength = len(cow.children.all())
+  context={
+    'cow':cow,
+    'childrenlength':childrenlength,
+    'childrenlist':childrenlist
+  }
+  return render(request, "single_cow.html",context) 
+
+
+
+
+
+
+
+
+def single_farm(request, farm_id):
+  farm = FarmLocations.objects.get(pk=farm_id)
+  cowlist = Cow.objects.filter(cow_location__location_name__contains=farm.location_name)
+  context={
+    'farm':farm, 
+    'cowlist':cowlist
+  }
+  return render(request, "single_farm.html",context) 

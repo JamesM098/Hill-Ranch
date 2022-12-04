@@ -7,7 +7,7 @@ from .models import FarmLocations
 class CowForm(ModelForm):
  class Meta:
   model = Cow
-  fields = ('cow_tag', 'cow_sex', 'cow_vaccinations', 'cow_location', 'cow_notes')
+  fields = ('cow_tag', 'cow_sex', 'cow_vaccinations', 'cow_location', 'cow_notes', 'cow_PARENT')
 
 
 class LocationForm(ModelForm):

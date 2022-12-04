@@ -11,55 +11,70 @@
 
 {% block body %}
  <div >
-    <div class="footer-box">
-        <form>
-          <a style = "margin-left: 1vw;" >
-            <span></span>
-            ALL Farms - 
-            {{total_cows }} total cows
-          </a>
-          
-        </form>
 
-      </div>
-  <h2 style="color:rgb(49, 49, 49)">Click a specific farm to see it's details and cows</h2>
-  <br/>
   
-  {% for farm in farm_list reversed %} 
-  <div class = "card">
-    <div class = "card-header" style = "font-size: 2vw;">
 
-      <a href = "{% url 'single-farm' farm.id %}"{{ farm }}>
+  <div class = "card">
+   <h1 style = "size:15px">{{ farm.farm_ntag }}</h1>
+   <br/>
+    <div class = "card-header" style = "color:blue; font-size: 2vw;">
+
+
     </div>
     <div class = "card-body">
-      <h4> <strong>Farm:</strong> {{ farm.location_name }}</h4>
-    </a>
+
+  
       <h5 class = "card-title">
-              
-              <strong>Description: </strong> {{ farm.location_description }}
+              <strong>Location:</strong> {{ farm.location_name }}
               <br/>
-              <strong>Number of cows: {{ total_cows}} </strong>
+              <strong>Description: </strong> {{ farm.location_description }}<br/><br>
+              <strong><h4>Cows on this farm:</h4> </strong>
+</h5>
 
+</div>
+</div>
 
+              {% for cow in cowlist reversed %} 
+              <div class = "card">
+                <div class = "card-header" style = "font-size: 2vw;">
+            
+                  <a href = "{% url 'single-cow' cow.id %}"{{ cow }}>
+                </div>
+                <div class = "card-body">
+                  <h4><strong>Cow  </strong>  {{ cow.cow_tag }}</h1>
+                </a>
+                  <h5 class = "card-title">
+                        
+                          <strong>Cow Sex: {{ cow.cow_sex }}</strong>
+                          <br/>
+                          <strong>Notes:</strong> {{ cow.cow_notes }}
+                          <br/>
+                          
+            
+                    </h1>
+                    </div>
+              </div>
               
+            
+              {% endfor %}
+
+
+
 
         </h1>
         </div>
   </div>
-  
-
-  {% endfor %}
-  
-
-
-</div>
-
 {% endblock %}
 
 
 {% block footer %}
 <div class="footer-box">
-
+  <form>
+    <a style = "margin-left: 13vw; margin-top:5vw" >
+      <span></span>
+      
+    </a>
+  </form>
 </div>
 
 {% endblock %}
@@ -102,6 +117,7 @@
   body {
   font-family: sans-serif;
   background:#75777c;
+
 }
 
     .column:hover {
@@ -116,11 +132,11 @@
     display: inline-block;
     padding: 10px 20px;
     color: #03e9f4;
-    font-size: 40px;
+    font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
-    transition: .10s;
+    transition: .5s;
     margin-top: 40px;
     letter-spacing: 4px
   }
@@ -135,7 +151,7 @@
     top: 0;
     left: -100%;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, transparent, #03e9f4);
     animation: btn-anim1 2s linear infinite;
   }
@@ -175,6 +191,7 @@
 .sticky + .content {
   padding-top: 10px;
 }
+
 
 
   </style>
