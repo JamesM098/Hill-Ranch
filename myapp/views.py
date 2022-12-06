@@ -113,7 +113,7 @@ def farms(request):
 def all_farms(request):
   farm_list = FarmLocations.objects.all()
   cow_list = Cow.objects.all()
-  total_cows = len(Cow.objects.all())
+  total_cows = len(Cow.objects.all()) -1
   context={
 
     "title":"All Farms",

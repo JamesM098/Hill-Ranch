@@ -31,7 +31,9 @@
               <strong>Vacinations: </strong>  {{ cow.cow_vaccinations }} <br/>
               <strong>Notes: </strong>  {{ cow.cow_notes }} <br/>
               {% if cow.cow_PARENT.cow_tag == "NO PARENT" %}
-                <a href = {{ cow.cow_PARENT.id }}> Parent List </a>
+                {% if cow.cow_tag != "NO PARENT" %}
+                  <a href = {{ cow.cow_PARENT.id }}> Parent List </a>
+                {% endif %}
               {% else %}
               <strong>Parent: </strong>  
                 <a href = {{ cow.cow_PARENT.id }}> {{cow.cow_PARENT}} </a>
@@ -40,12 +42,15 @@
             <br>
             
               {% if childrenlength > 0 %}
-              <strong>Calves: </strong> <br/>
+                {% if cow.cow_tag == "NO PARENT" %}
+                  <strong>Parents: </strong> <br/>
+                {% else %}
+                  <strong>Calves: </strong> <br/>
+                {% endif %}
                 {% for child in childrenlist reversed %}
                   <a href = {{ child.id }}> {{child.cow_tag}} </a>
                   <br>
                 {% endfor %}
-              {% else %}
               {% endif %}
 
 
