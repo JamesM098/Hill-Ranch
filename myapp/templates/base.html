@@ -38,6 +38,14 @@
             <li><a href = "/farms/all-farms/">All Farms</a></li>
             <li><a href = "/add-location">Add Farm Location</a></li>
 
+            {% if user.is_authenticated %}
+              <li><a href = "/members/logout_user">Logout</a></li>
+            {% else %}
+              <li><a href = "/members/register_user">Register</a></li>
+              <li><a href = "/members/login_user">Login</a></li>
+            {% endif %}
+
+
 
      
               
@@ -47,20 +55,30 @@
 
             <form class = "d-flex" method = POST action ="{% url 'farms_url' %}">
             {% csrf_token %}
+            
             <input class="form-control me-2" type ="search" placeholder="Search for a location... " aria-label="Search" name ="locSearch"><button class = "hollow button" type = "submit">SEARCH</button></form></li>
            
               
               </a>
             </li>
-            <li style = "margin-left: 10px;margin-top:0.8vw"><a href = "/help" class = "hollow alert button" style = "font-size: 17px;"> HELP </a></li>
+            <!-- <li style = "margin-left: 10px;margin-top:0.8vw"><a href = "/help" class = "hollow alert button" style = "font-size: 17px;"> HELP </a></li> -->
           </ul>
         </h2>
       </div>
       {% endblock %}
 
 
+      {% if messages %}
+      {% for message in messages %}
+        <div class = "alert button">
+          {{ message }}
+        </div>
+        
+      {% endfor %}
+    {% endif %}
 
-  {% block body %}{% endblock %}
+  {% block body %}
+  {% endblock %}
 
   <script src="{% static 'js/vendor.js' %}"></script>
   <script src="{% static 'js/foundation.min.js' %}"></script>

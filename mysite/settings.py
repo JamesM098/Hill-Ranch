@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'members'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,6 @@ django_heroku.settings(locals())
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STRIPE_PUBLIC_KEY = 'pk_test_51M9HjyD5IxKD4pHtOztKifuKcbVn339mBhGrXZ8oRFeWMN7n5xyo7sufq6Ez4rxgmWcH1Uxmal1QVKEJXai1Fzh400WgrxnXBz'
+STRIPE_SECRET_KEY = 'sk_test_51M9HjyD5IxKD4pHtRqxAyaqDsuqXqnTE7XT8M5HxZhaFApgI71TTs0GdkTdY6roz1Mm2ix0uWRJZ7c4gDbRsL6Gx005JodBiiB'

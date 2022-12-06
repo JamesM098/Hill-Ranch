@@ -10,59 +10,77 @@
 
 
 {% block body %}
- <div >
-    <div class="footer-box">
-        <form>
-          <a style = "margin-left: 1vw;" >
-            <span></span>
-            ALL Farms - 
-            {{total_cows }} total cows
-          </a>
-          
-        </form>
-
-      </div>
-  <h2 style="color:rgb(49, 49, 49)">Click a specific farm to see it's details and cows</h2>
-  <br/>
+  {% if searched %}
+    <h1 class = "button large"  >
+      You Searched for: {{ searched }}
+    </h1>
   
-  {% for farm in farm_list reversed %} 
+    <h3 class = "secondary button">
+      Click on a cow to see it's own unique page
+    </h3>
+  </br>
+  {% for cow in name_search %}
   <div class = "card">
     <div class = "card-header" style = "font-size: 2vw;">
 
-      <a href = "{% url 'single-farm' farm.id %}"{{ farm }}>
+      <a href = "{% url 'single-cow' cow.id %}"{{ cow }}>
     </div>
     <div class = "card-body">
-      <h4> <strong>Farm:</strong> {{ farm.location_name }}</h4>
+      <h4><strong>Cow: </strong>  {{ cow.cow_tag }}</h1>
     </a>
       <h5 class = "card-title">
-              
-              <strong>Description: </strong> {{ farm.location_description }}
+              <strong>Location:</strong> {{ cow.cow_location }}
               <br/>
-
-
-
-              
+              <strong>Notes: </strong> {{ cow.cow_notes }}<br/>
 
         </h1>
         </div>
   </div>
-  
-
   {% endfor %}
-  
+
+  {% else %}
+    <h1>
+      <center>
+      <div class = "alert button">
+        <h3>YOU FORGOT TO SEARCH SOMETHING...</h3>
+      </div>
+      </center>
+      <center>
+      <div class = "button">
+      <h4 >Enter Either: </h4></br>
+        
+          <li style = "font-size: 1.3vw; margin-right:1.6vw;">Cow Tag</li>
+      </br>
+          <li style = "font-size: 1.3vw;">Farm Location</li>
+          </div>
+          </center>
+        
+        
+        
+    </h1>
+       
+       </div>
+       </div>
 
 
-</div>
+  {% endif %}
+
 
 {% endblock %}
 
 
 {% block footer %}
 <div class="footer-box">
-
+  <form>
+    <a style = "margin-left: 13vw; margin-top:30vw" >
+      <span></span>
+      Page created by James Meyer - Specifically created for CINS465 - Web Dev
+    </a>
+  </form>
 </div>
 
 {% endblock %}
+
 
 
 
@@ -116,11 +134,11 @@
     display: inline-block;
     padding: 10px 20px;
     color: #03e9f4;
-    font-size: 40px;
+    font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
-    transition: .10s;
+    transition: .5s;
     margin-top: 40px;
     letter-spacing: 4px
   }
@@ -135,7 +153,7 @@
     top: 0;
     left: -100%;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, transparent, #03e9f4);
     animation: btn-anim1 2s linear infinite;
   }
@@ -176,6 +194,11 @@
   padding-top: 10px;
 }
 
-
+ 
   </style>
+{% endblock %}
+
+
+{% block loginpage %}
+<p>log in here</p>
 {% endblock %}

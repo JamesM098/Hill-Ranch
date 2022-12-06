@@ -9,58 +9,43 @@
 
 
 
+
 {% block body %}
- <div >
-    <div class="footer-box">
-        <form>
-          <a style = "margin-left: 1vw;" >
-            <span></span>
-            ALL Farms - 
-            {{total_cows }} total cows
-          </a>
-          
-        </form>
+<center>
 
-      </div>
-  <h2 style="color:rgb(49, 49, 49)">Click a specific farm to see it's details and cows</h2>
-  <br/>
-  
-  {% for farm in farm_list reversed %} 
-  <div class = "card">
-    <div class = "card-header" style = "font-size: 2vw;">
+    
 
-      <a href = "{% url 'single-farm' farm.id %}"{{ farm }}>
-    </div>
-    <div class = "card-body">
-      <h4> <strong>Farm:</strong> {{ farm.location_name }}</h4>
-    </a>
-      <h5 class = "card-title">
-              
-              <strong>Description: </strong> {{ farm.location_description }}
-              <br/>
+        <title>Buy cool new product</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+        <script src="https://js.stripe.com/v3/"></script>
+
+    
 
 
+                <div class = "footer-box">
+                    <h3>{{ product.name }}</h3>
 
-              
-
-        </h1>
-        </div>
-  </div>
-  
-
-  {% endfor %}
-  
-
-
-</div>
+    
+                    <div>
+                        <h5>${{ product.get_display_price }}</h5>
+                        <form action="{% url 'create-checkout-session' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type= "button large">Checkout</button>
+                        </form>
+                    </div>
+                    </div>
+             
+</center>
 
 {% endblock %}
 
 
-{% block footer %}
-<div class="footer-box">
 
-</div>
+
+
+{% block footer %}
+
 
 {% endblock %}
 
@@ -116,11 +101,11 @@
     display: inline-block;
     padding: 10px 20px;
     color: #03e9f4;
-    font-size: 40px;
+    font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
     overflow: hidden;
-    transition: .10s;
+    transition: .5s;
     margin-top: 40px;
     letter-spacing: 4px
   }
@@ -135,7 +120,7 @@
     top: 0;
     left: -100%;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background: linear-gradient(90deg, transparent, #03e9f4);
     animation: btn-anim1 2s linear infinite;
   }

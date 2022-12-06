@@ -1,11 +1,29 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import FarmLocations
 from .models import Cow
+from .models import Product
+
+
 
 from django.http import HttpResponseRedirect
 from .forms import CowForm
 from .forms import LocationForm
+
+from django.conf import settings
+from django.http import JsonResponse
+from django.views import View
+from django.views.generic import TemplateView
+
+
+
+import stripe
+
+
 # Create your views here.
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
 
 def add_location(request):
   submitted = False
@@ -44,7 +62,7 @@ def add_cow(request):
 
 def show_cows(request, cow_id):
     cow = Cow.objects.get(pk=cow_id)
-    return render(request, "show_cow.html",{'cow':cow}) 
+    return render(request, "cows.html",{'cow':cow}) 
 
 def show_farms(request, farm_id):
     farm = FarmLocations.objects.get(pk=farm_id)
@@ -88,7 +106,7 @@ def farms(request):
     location_search = FarmLocations.objects.filter(location_name__contains=searched)
 
 
-    return render(request, 'farms.html', {'title':"Cows",'locSearch':searched, 'location_search':location_search})
+    return render(request, 'farms.html', {'title':"Cows",'searched':searched, 'location_search':location_search})
   else:
     return render(request, "farms.html", context)
   
@@ -119,12 +137,6 @@ def single_cow(request, cow_id):
   return render(request, "single_cow.html",context) 
 
 
-
-
-
-
-
-
 def single_farm(request, farm_id):
   farm = FarmLocations.objects.get(pk=farm_id)
   cowlist = Cow.objects.filter(cow_location__location_name__contains=farm.location_name)
@@ -133,3 +145,48 @@ def single_farm(request, farm_id):
     'cowlist':cowlist
   }
   return render(request, "single_farm.html",context) 
+
+
+class CreateCheckoutSessionView(View):
+    def post(self, request, *args, **kwargs):
+        price = Price.objects.get(id=self.kwargs["pk"])
+        domain = "https://yourdomain.com"
+        if settings.DEBUG:
+            domain = "http://127.0.0.1:8000"
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price': price.stripe_price_id,
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=domain + '/success/',
+            cancel_url=domain + '/cancel/',
+        )
+        return redirect(checkout_session.url)
+
+
+
+
+
+class SuccessView(TemplateView):
+    template_name = "success.html"
+
+class CancelView(TemplateView):
+    template_name = "cancel.html"
+
+class ProductLandingPageView(TemplateView):
+    template_name = "meat.html"
+
+    def get_context_data(self, **kwargs):
+        product = Product.objects.get(name="5lbs meat")
+        price = Product.price
+        context = super(ProductLandingPageView,
+                        self).get_context_data(**kwargs)
+        context.update({
+            "product": product,
+            "prices": price
+        })
+        return context
