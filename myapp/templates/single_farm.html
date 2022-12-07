@@ -10,48 +10,43 @@
 
 
 {% block body %}
- <div >
+
 
   
 
-  <div class = "card">
-   <h1 style = "size:15px">{{ farm.farm_ntag }}</h1>
-   <br/>
-    <div class = "card-header" style = "color:blue; font-size: 2vw;">
-
-
-    </div>
+  <div class = "cardtop">
     <div class = "card-body">
-
+      <center>
+      {% if user.is_staff %}
+      <a href = "{% url 'update-farm' farm.id %}" class = "button">
+      UPDATE Farm: {{ farm.location_name }}</a>
+    {% endif %}
   
       <h5 class = "card-title">
-              <strong>Location:</strong> {{ farm.location_name }}
-              <br/>
               <strong>Description: </strong> {{ farm.location_description }}<br>
-              {% if user.is_staff %}
-              <a href = "{% url 'update-farm' farm.id %}" class = "button">
-              UPDATE</a>
-            {% endif %}
-              <div class ="login-box">
-                Cows on this farm:
-              </div>
-</h5>
+              
+
+</h5></center>
+
 
 </div>
 </div>
 
+          <div class ="row">
               {% for cow in cowlist reversed %} 
+              <div class = "column">
               <div class = "card">
                 <div class = "card-header" style = "font-size: 2vw;">
-            
-                  <a href = "{% url 'single-cow' cow.id %}"{{ cow }}>
+
+      
                 </div>
                 <div class = "card-body">
-                  <h4><strong>Cow  </strong>  {{ cow.cow_tag }}</h1>
+            
+                  <h4><strong>Cow  </strong> <a href = "{% url 'single-cow' cow.id %}">{{ cow.cow_tag }}</h4>
                 </a>
                   <h5 class = "card-title">
                         
-                          <strong>Cow Sex: {{ cow.cow_sex }}</strong>
+                          <strong>Cow Sex:</strong>  {{ cow.cow_sex }}
                           <br/>
                           <strong>Notes:</strong> {{ cow.cow_notes }}
                           <br/>
@@ -60,20 +55,18 @@
                             UPDATE</a>
                           {% endif %}                          
             
-                    </h1>
-                    </div>
+
               </div>
               
+            </div>
             
+</div> 
               {% endfor %}
               
 
 
 
 
-        </h1>
-        </div>
-  </div>
 {% endblock %}
 
 
@@ -176,7 +169,30 @@
 
     
   }
+  .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin-left: 2vw;
+  padding: 1vw;
+  text-align: center;
+  border:black;
+  background-color: #e9e9e9;
+}
+.card:hover {
+  box-shadow: 0 20px 60px 0 hsl(180, 100%, 50%);
+}
 
+.cardtop {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2vw;
+  border:black;
+  background-color: #e9e9e9;
+}
+.cardtop:hover {
+  box-shadow: 0 20px 60px 0 hsl(180, 100%, 50%);
+}
 
 #navbar {
   overflow: hidden;

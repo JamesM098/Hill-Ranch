@@ -10,21 +10,36 @@
 
 
 {% block body %}
+
+
+
  <div >
 
   
 
   <div class = "card">
-   <h1 style = "size:15px">{{ cow.cow_ntag }}</h1>
+
    <br/>
     <div class = "card-header" style = "color:blue; font-size: 2vw;">
 
 
     </div>
+    
     <div class = "card-body">
 
     </a>
       <h5 class = "card-title">
+        
+    {% if user.is_staff %}
+    <a href = "{% url 'update-cow' cow.id %}" class = "button">
+    UPDATE Cow: {{ cow.cow_tag }}</a>
+  {% endif %}
+
+    <h5 class = "card-title">
+            <strong>Description: </strong> {{ farm.location_description }}<br>
+            
+
+
               <strong>Location:</strong> <a href = /single_farm/{{ cow.cow_location.id }}>
                 <div class = "secondary button">{{ cow.cow_location }}</div></a>
               <br/>
@@ -57,10 +72,6 @@
                   <br>
                 {% endfor %}
               {% endif %}
-              {% if user.is_staff %}
-              <a href = "{% url 'update-cow' cow.id %}" class = "button">
-                UPDATE</a>
-            {% endif %}
 
 
 
@@ -105,6 +116,8 @@
     clear: both;
     display: table;
   }
+
+  
   .xa {
     font-size: 2vw;
     font-family:'Times New Roman', Times, serif;
@@ -121,6 +134,19 @@
   font-family: sans-serif;
   background:#75777c;
 
+}
+
+.cardtop {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 2vw;
+  border:black;
+  background-color: #e9e9e9;
+}
+.cardtop:hover {
+  box-shadow: 0 20px 60px 0 hsl(180, 100%, 50%);
 }
 
     .column:hover {

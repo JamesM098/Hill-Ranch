@@ -108,7 +108,7 @@ def farms(request):
     location_search = FarmLocations.objects.filter(location_name__contains=searched)
 
 
-    return render(request, 'farms.html', {'title':"Cows",'searched':searched, 'location_search':location_search})
+    return render(request, 'farms.html', {'title':"Searched Farms...",'searched':searched, 'location_search':location_search})
   else:
     return render(request, "farms.html", context)
   
@@ -132,6 +132,7 @@ def single_cow(request, cow_id):
   childrenlist = cow.children.all()
   childrenlength = len(cow.children.all())
   context={
+    'title':"Cow",
     'cow':cow,
     'childrenlength':childrenlength,
     'childrenlist':childrenlist
@@ -143,6 +144,7 @@ def single_farm(request, farm_id):
   farm = FarmLocations.objects.get(pk=farm_id)
   cowlist = Cow.objects.filter(cow_location__location_name__contains=farm.location_name)
   context={
+    'title':"Farm",
     'farm':farm, 
     'cowlist':cowlist
   }
@@ -156,7 +158,7 @@ def update_cow(request, cow_id):
   if form.is_valid():
     form.save()
     return redirect('/cows/all-cows')
-  return render(request, 'update_cow.html',{'cow':cow, 'form':form})
+  return render(request, 'update_cow.html',{'cow':cow, 'form':form, 'title':"Update Cow..."})
 
 def update_farm(request, farm_id):
   farm = FarmLocations.objects.get(pk=farm_id)
@@ -164,7 +166,7 @@ def update_farm(request, farm_id):
   if form.is_valid():
     form.save()
     return redirect('/farms/all-farms')
-  return render(request, 'update_farm.html',{'farm':farm, 'form':form})
+  return render(request, 'update_farm.html',{'farm':farm, 'form':form, 'title':"Update Farm..."})
 
 
 class CreateCheckoutSessionView(View):
