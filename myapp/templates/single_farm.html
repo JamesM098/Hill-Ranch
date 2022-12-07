@@ -27,8 +27,14 @@
       <h5 class = "card-title">
               <strong>Location:</strong> {{ farm.location_name }}
               <br/>
-              <strong>Description: </strong> {{ farm.location_description }}<br/><br>
-              <strong><h4>Cows on this farm:</h4> </strong>
+              <strong>Description: </strong> {{ farm.location_description }}<br>
+              {% if user.is_staff %}
+              <a href = "{% url 'update-farm' farm.id %}" class = "button">
+              UPDATE</a>
+            {% endif %}
+              <div class ="login-box">
+                Cows on this farm:
+              </div>
 </h5>
 
 </div>
@@ -49,7 +55,10 @@
                           <br/>
                           <strong>Notes:</strong> {{ cow.cow_notes }}
                           <br/>
-                          
+                          {% if user.is_staff %}
+                          <a href = "{% url 'update-cow' cow.id %}" class = "button">
+                            UPDATE</a>
+                          {% endif %}                          
             
                     </h1>
                     </div>
@@ -57,6 +66,7 @@
               
             
               {% endfor %}
+              
 
 
 
@@ -191,7 +201,15 @@
 .sticky + .content {
   padding-top: 10px;
 }
+.login-box {
 
+  color:#00a8b1;
+  padding: 5px;
+  font-size: 2vw;
+
+
+  border-radius: 10px;
+}
 
 
   </style>

@@ -18,6 +18,9 @@ urlpatterns = [
     path('success/', views.SuccessView.as_view(), name='success'),
     path('create-checkout-session/<pk>/', views.CreateCheckoutSessionView.as_view(), name='create-checkout-session'),
     path('meat', views.ProductLandingPageView.as_view(), name='landing'),
+    path('update_cow/<cow_id>', views.update_cow, name = "update-cow"),
+    path('update_farm/<farm_id>', views.update_farm, name = "update-farm"),
+
 
 
 ]

@@ -13,6 +13,8 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -39,7 +41,7 @@ def add_location(request):
         submitted = True
   return render(request, "add_location.html",{'title':'Add a Location...','form':form, 'submitted':submitted}) 
 
-
+@login_required(login_url='/members/login_user')
 def add_cow(request):
   submitted = False
   form = CowForm
@@ -145,6 +147,24 @@ def single_farm(request, farm_id):
     'cowlist':cowlist
   }
   return render(request, "single_farm.html",context) 
+
+
+
+def update_cow(request, cow_id):
+  cow = Cow.objects.get(pk=cow_id)
+  form = CowForm(request.POST or None, instance=cow )
+  if form.is_valid():
+    form.save()
+    return redirect('/cows/all-cows')
+  return render(request, 'update_cow.html',{'cow':cow, 'form':form})
+
+def update_farm(request, farm_id):
+  farm = FarmLocations.objects.get(pk=farm_id)
+  form = LocationForm(request.POST or None, instance=farm )
+  if form.is_valid():
+    form.save()
+    return redirect('/farms/all-farms')
+  return render(request, 'update_farm.html',{'farm':farm, 'form':form})
 
 
 class CreateCheckoutSessionView(View):

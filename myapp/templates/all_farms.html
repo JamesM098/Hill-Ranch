@@ -29,15 +29,19 @@
   <div class = "card">
     <div class = "card-header" style = "font-size: 2vw;">
 
-      <a href = "{% url 'single-farm' farm.id %}"{{ farm }}>
+      
     </div>
     <div class = "card-body">
-      <h4> <strong>Farm:</strong> {{ farm.location_name }}</h4>
+      <h4> <strong>Farm:</strong> <a href = "{% url 'single-farm' farm.id %}">{{ farm.location_name }}</a></h4>
     </a>
       <h5 class = "card-title">
               
               <strong>Description: </strong> {{ farm.location_description }}
               <br/>
+              {% if user.is_staff %}
+                <a href = "{% url 'update-farm' farm.id %}" class = "button">
+                UPDATE</a>
+              {% endif %}
 
 
 

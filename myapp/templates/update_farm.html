@@ -12,34 +12,34 @@
 
 {% block body %}
 <center>
-</br></br>
-{% if submitted %}
- Succesfully added Farm!!!!
-{% else %}
-  {% if user.is_staff %}
-  <div class ="footer-box">
-  <form action ="" method=POST>
-    {% csrf_token %}
-    <a>
-      <div class = "secondary button">{{ form.as_p }}</div>
-      <input type = "submit" value="Submit" class = "button">
-    </a>
-  </form>
-  </div>
-  {% else %}
-  <div class="footer-box">
-    <form action ="" method=POST>
-      <a>
-        You are not allowed here.
-      </a>
-
-    </form>
-  </div>
-  {% endif %}
-
- {% endif %}
+    {% if user.is_staff %}
+    <div class="footer-box">
+        <form>
+          <a>
+            Update Farm {{ farm }}
+          </a>
+        </form>
+      </div>
+      <div class ="footer-box">
+        <form action ="" method=POST>
+            <a>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type = "submit" value="Submit" class = "button">
+            </a>
+        </form>
+    </div>
+    {% else %}
+    <div class="footer-box">
+        <form action ="" method=POST>
+        <a>
+            You are not allowed here.
+        </a>
+    
+        </form>
+    </div>
+    {% endif %}
 </center>
-
 {% endblock %}
 
 
@@ -108,7 +108,7 @@
     text-transform: uppercase;
     overflow: hidden;
     transition: .5s;
-    margin-top: 2px;
+    margin-top: 40px;
     letter-spacing: 4px
   }
 

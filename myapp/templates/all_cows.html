@@ -26,21 +26,22 @@
   <div class = "card">
     <div class = "card-header" style = "font-size: 2vw;">
 
-      <a href = "{% url 'single-cow' cow.id %}"{{ cow }}>
+      
     </div>
     <div class = "card-body">
-      <h4><strong>Cow Tag: </strong>  {{ cow.cow_tag }}</h1>
-    </a>
+      <h4><strong>Cow Tag: </strong>  <a href = "{% url 'single-cow' cow.id %}">{{ cow.cow_tag }}</a>
+    
       <h5 class = "card-title">
-              <strong>Farm:</strong> {{ cow.cow_location }}
+              <strong>Farm:</strong> <a href = /single_farm/{{ cow.cow_location.id }}>{{ cow.cow_location }}</a>
               <br/>
               <strong>Cow Sex: </strong> {{ cow.cow_sex }}
               <br/>
               <strong>Notes:</strong> {{ cow.cow_notes }}
               <br/>
-              
-
-        </h1>
+              {% if user.is_staff %}
+                <a href = "{% url 'update-cow' cow.id %}" class = "button">
+                  UPDATE</a>
+              {% endif %}
         </div>
   </div>
   

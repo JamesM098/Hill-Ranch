@@ -12,33 +12,35 @@
 
 {% block body %}
 <center>
-</br></br>
-{% if submitted %}
- Succesfully added Farm!!!!
+{% if user.is_staff %}
+    <div class="footer-box">
+        <form>
+          <a>
+            Update cow {{ cow }}
+          </a>
+        </form>
+      </div>
+      <div class ="footer-box">
+        <form action ="" method=POST>
+            <a>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type = "submit" value="Submit" class = "button">
+            </a>
+        </form>
+    </div>
 {% else %}
-  {% if user.is_staff %}
-  <div class ="footer-box">
-  <form action ="" method=POST>
-    {% csrf_token %}
-    <a>
-      <div class = "secondary button">{{ form.as_p }}</div>
-      <input type = "submit" value="Submit" class = "button">
-    </a>
-  </form>
-  </div>
-  {% else %}
-  <div class="footer-box">
+<div class="footer-box">
     <form action ="" method=POST>
-      <a>
+    <a>
         You are not allowed here.
-      </a>
+    </a>
 
     </form>
-  </div>
-  {% endif %}
-
- {% endif %}
+</div>
+{% endif %}
 </center>
+
 
 {% endblock %}
 
@@ -108,8 +110,9 @@
     text-transform: uppercase;
     overflow: hidden;
     transition: .5s;
-    margin-top: 2px;
-    letter-spacing: 4px
+    margin-top: 5px;
+    letter-spacing: 4px;
+    font-size: 40px
   }
 
 

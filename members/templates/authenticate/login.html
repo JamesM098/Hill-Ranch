@@ -17,20 +17,11 @@
 <form action="" method=POST>
     {% csrf_token %}
     <form>
-      <div class="user-box">
-        <div class="grid-container">
-          <div class="grid-x grid-padding-x">
-            <div class="small-3 cell">
+      <div class="login-box">
         <label for="exampleInputEmail1" class="form-label">Username</label>
         <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
-        </div>
-        </div>
-        </div>
-        
-      </div>
-      <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-          <div class="small-3 cell">
+
+
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input type="password" class="form-control" name="password">
       <button type="submit" class="button">Submit</button>

@@ -25,14 +25,18 @@
 
     </a>
       <h5 class = "card-title">
-              <strong>Location:</strong> {{ cow.cow_location }}
+              <strong>Location:</strong> <a href = /single_farm/{{ cow.cow_location.id }}>
+                <div class = "secondary button">{{ cow.cow_location }}</div></a>
               <br/>
               <strong>Sex: </strong> {{ cow.cow_sex }}<br/>
               <strong>Vacinations: </strong>  {{ cow.cow_vaccinations }} <br/>
               <strong>Notes: </strong>  {{ cow.cow_notes }} <br/>
               {% if cow.cow_PARENT.cow_tag == "NO PARENT" %}
                 {% if cow.cow_tag != "NO PARENT" %}
-                  <a href = {{ cow.cow_PARENT.id }}> Parent List </a>
+                  <a href = {{ cow.cow_PARENT.id }}> 
+                    <div class = "button">Parent List 
+                      </div>
+                    </a>
                 {% endif %}
               {% else %}
               <strong>Parent: </strong>  
@@ -48,10 +52,15 @@
                   <strong>Calves: </strong> <br/>
                 {% endif %}
                 {% for child in childrenlist reversed %}
-                  <a href = {{ child.id }}> {{child.cow_tag}} </a>
+                  <a href = {{ child.id }}>
+                    {{child.cow_tag}} </a>
                   <br>
                 {% endfor %}
               {% endif %}
+              {% if user.is_staff %}
+              <a href = "{% url 'update-cow' cow.id %}" class = "button">
+                UPDATE</a>
+            {% endif %}
 
 
 

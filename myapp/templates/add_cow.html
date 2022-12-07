@@ -16,12 +16,27 @@
 {% if submitted %}
  Succesfully added Cow!!!!
 {% else %}
- <form action ="" method=POST>
-   {% csrf_token %}
-   <div class = "secondary button">{{ form.as_p }}</div>
-   <input type = "submit" value="Submit" class = "button">
- </form>
+  {% if user.is_staff %}
+    <div class="footer-box">
+      <form action ="" method=POST>
+        {% csrf_token %}
+        <a>
+        <div class = "secondary button">{{ form.as_p }}</div>
+        <input type = "submit" value="Submit" class = "button">
+        </a>
 
+      </form>
+    </div>
+    {% else %}
+    <div class="footer-box">
+      <form action ="" method=POST>
+        <a>
+          You are not allowed here.
+        </a>
+
+      </form>
+    </div>
+    {% endif %}
  {% endif %}
 </center>
 
@@ -93,7 +108,7 @@
     text-transform: uppercase;
     overflow: hidden;
     transition: .5s;
-    margin-top: 40px;
+    margin-top: 2px;
     letter-spacing: 4px
   }
 
