@@ -34,7 +34,9 @@
             <a href = "/" class = "button large"> 
               Hello {{ user }}
 
-            {% if user.is_staff %}
+            {% if user.is_superuser %}
+            <a href = "/admin"><div class = "success button">ADMIN</div></a>
+
             {% else %}
             <a class = "alert button">
               You need an admin account to add and update cows or farms.</a>
@@ -67,6 +69,8 @@
 
             {% if user.is_authenticated %}
               <li><a href = "/members/logout_user">Logout</a></li>
+
+
             {% else %}
               <li><a href = "/members/register_user">Register</a></li>
               <li><a href = "/members/login_user">Login</a></li>
