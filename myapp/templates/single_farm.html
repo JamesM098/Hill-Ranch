@@ -36,10 +36,7 @@
               {% for cow in cowlist reversed %} 
               <div class = "column">
               <div class = "card">
-                <div class = "card-header" style = "font-size: 2vw;">
-
-      
-                </div>
+ 
                 <div class = "card-body">
             
                   <h4><strong>Cow  </strong> <a href = "{% url 'single-cow' cow.id %}">{{ cow.cow_tag }}</h4>
@@ -49,9 +46,9 @@
                           <strong>Sex:</strong>  {{ cow.cow_sex }}
                           <br/>
                           <strong>Notes:</strong> {{ cow.cow_notes }}
-                          <br/>
+                  </br>
                           {% if user.is_staff %}
-                          <a href = "{% url 'update-cow' cow.id %}" class = "button">
+                          <a href = "{% url 'update-cow' cow.id %}" class = "button" >
                             UPDATE</a>
                           {% endif %}                          
             
@@ -170,14 +167,18 @@
     
   }
 .card {
-  height: 100%;
-  width: 100%;
+  position: relative;
+  height:fit-content;
+  width:fit-content;
+  margin:1vw;
+  border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin-left: 2vw;
   padding: 1vw;
   text-align: center;
   border:black;
   background-color: #e9e9e9;
+  overflow:visible;
 }
 .card:hover {
   box-shadow: 0 20px 60px 0 hsl(180, 100%, 50%);
